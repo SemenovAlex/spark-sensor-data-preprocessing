@@ -7,18 +7,48 @@ You can use pySpark locally which is helpfull to prepare your code before runnin
 
 ## Data description
 
-In this case we will have the data exported from Historian database. It has the following format:
+In this case we will have the data similar to the one that might be exported from the database. It has the following format:
 
 - TagName
 - DateTime 
 - Value
 - StringValue
 
-**TagName** is a unique identifier of the sensor, it has information where it is installed and what type of information is collected by this sensor. **DateTime** is the date and the time when a certain value was recorded by the sensor. **Value** is a numeric value recorderd by the sensor. **StringValue** is a string value recorderd by the sensor.
+**TagName** is a unique identifier of the sensor, it has an information where it is installed and what type of information is collected by this sensor. **DateTime** is the date and the time when a certain value was recorded by the sensor. **Value** is a numeric value recorderd by the sensor. **StringValue** is a string value recorderd by the sensor.
 
-We have daily extracts of the data each day is represented by one .csv file. Take a look at the example in the data folder. You can also use the script _generate_data.py_ to generate such data.
+We have daily extracts of the data each represented by one .csv file. Take a look at the examples in the data folder. You can also use the notebook _generate_data.ipynb_ to generate such data.
 
-## Preprocessing description
+## Process description
+
+We have a production line with 3 equipments. Our product is produced in batches that should go through all of them. Second equipment also has 3 different stages, each corresponding to a certain status of this equipment. 
+
+This is how sensor record data for the entering batch:
+
+- Batch ID is stored by the sensor EQ01.BATCH when a new batch enters the equipment.
+- Equipment #1 stores status 0 by the sensor EQ01.STATUS.
+- Equipment #1 stores power and temperature values by the sensors EQ01.POWER and EQ01.TEMP until the batch is in the equipment #1.
+- Batch ID is stored by the sensor EQ02.BATCH when the batch enters the equipment #2.
+- Equipment #2 stores status 0 by the sensor EQ02.STATUS when the batch enters it.
+- Equipment #2 stores power and temperature values by the sensors EQ02.POWER and EQ02.TEMP until batch is in the equipment #2.
+- At the moment when status of the equipment #2 is changed sensor EQ02.STATUS records a status value.
+- Batch ID is stored by the sensor EQ03.BATCH when the batch enters the equipment #3.
+- Equipment #3 stores status 0 by the sensor EQ03.STATUS when the batch enters it.
+- Equipment #3 stores power and temperature values by the sensors EQ03.POWER and EQ03.TEMP until batch is in the equipment #3.
+
+Sensor saves the value at the time when it's changed with respect to the previous value of the sensor.
+
+## Objective
+
+We want to obtain a data set ready to apply machine learning models. It should have one row per each batch and many columns corresponding to statistics based on this batch data. Below is the list of the statistics we want to calculate:
+
+1. Weighted Minimum, Average, Maximum, Standard deviation of the POWER and TEMP signals in each equipment.
+2. Weighted Minimum, Average, Maximum, Standard deviation of the POWER and TEMP signals in each equipment per status.
+
+Notes:
+- Weighted means that we should take into account how many seconds signal stayed constant.
+
+
+Solution is described in a separate file [here]().
 
 ## Comparison
 
