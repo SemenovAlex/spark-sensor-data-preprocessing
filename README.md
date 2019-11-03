@@ -24,18 +24,18 @@ We have daily extracts of the data each represented by one .csv file. Take a loo
 
 We have a production line with 3 equipments. The product is produced in batches that should go through all of them. Second equipment also has 3 different stages, each corresponding to a certain status of this equipment. 
 
-This is how a sensor records data for the entering batch:
+This is how all sensors record the data of the entering batch:
 
 - Batch ID is stored by the sensor EQ01.BATCH when a new batch enters the equipment.
 - Equipment #1 stores status 0 by the sensor EQ01.STATUS.
-- Equipment #1 stores power and temperature values by the sensors EQ01.POWER and EQ01.TEMP until the batch is in the equipment #1.
+- Equipment #1 stores power and temperature values by the sensors EQ01.POWER and EQ01.TEMP while the batch is in the equipment #1.
 - Batch ID is stored by the sensor EQ02.BATCH when the batch enters the equipment #2.
 - Equipment #2 stores status 0 by the sensor EQ02.STATUS when the batch enters it.
-- Equipment #2 stores power and temperature values by the sensors EQ02.POWER and EQ02.TEMP until batch is in the equipment #2.
+- Equipment #2 stores power and temperature values by the sensors EQ02.POWER and EQ02.TEMP while the batch is in the equipment #2.
 - At the moment when status of the equipment #2 is changed sensor EQ02.STATUS records a status value.
 - Batch ID is stored by the sensor EQ03.BATCH when the batch enters the equipment #3.
 - Equipment #3 stores status 0 by the sensor EQ03.STATUS when the batch enters it.
-- Equipment #3 stores power and temperature values by the sensors EQ03.POWER and EQ03.TEMP until batch is in the equipment #3.
+- Equipment #3 stores power and temperature values by the sensors EQ03.POWER and EQ03.TEMP while the batch is in the equipment #3.
 
 Sensor saves the value at the time when it's changed with respect to the previous value of the sensor.
 
@@ -43,16 +43,16 @@ Sensor saves the value at the time when it's changed with respect to the previou
 
 We want to obtain a data set ready to apply machine learning models. It should have one row per each batch and many columns corresponding to the statistics based on this batch data. Below is the list of the statistics we want to calculate:
 
-1. Minimum, Average, Maximum, Standard deviation of the POWER and TEMP signals in each equipment.
-2. Minimum, Average, Maximum, Standard deviation of the POWER and TEMP signals in each equipment per status.
-3. Weighted Minimum, Average, Maximum, Standard deviation of the POWER and TEMP signals in each equipment.
-4. Weighted Minimum, Average, Maximum, Standard deviation of the POWER and TEMP signals in each equipment per status.
+1. Minimum of the POWER and TEMP signals in each equipment per status.
+2. Average of the POWER and TEMP signals in each equipment per status.
+3. Maximum of the POWER and TEMP signals in each equipment per status.
+4. Standard deviation of the POWER and TEMP signals in each equipment per status.
+5. Weighted Average of the POWER and TEMP signals in each equipment per status.
 
 Notes:
-- Weighted statistics mean that we should take into account how many seconds signal stayed constant.
+- Weighted statistic means that we should take into account how many seconds signal stayed constant.
 
 
 ## Solution
 
-
-
+Solution is described in the SOLUTION.md
