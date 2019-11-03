@@ -12,7 +12,7 @@ Take a look at the _defining-batch-and-status.ipynb_ to see how this can be done
 
 ## Calculating statistics for every batch and status
 
-This is the point where we start to use pySpark. Take a look at the _calculating-batch-statistics.ipynb.ipynb_ to see how agregations were made. In the notebook we use both ways of wrangling with the data: SQL based approach and Pandas based approach.
+This is the point where we start to use pySpark. Take a look at the _calculating-batch-statistics.ipynb_ to see how agregations were made. In the notebook we use both ways of wrangling with the data: SQL based approach and Pandas based approach.
 
 As a result for every batch we have 50 features (5 for every status and equipment), 25 for the POWER sensor and 25 for the TEMP sensor. Final step will be to apply ML to this data to predict target variable.
 
