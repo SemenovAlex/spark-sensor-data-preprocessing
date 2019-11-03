@@ -21,9 +21,9 @@ As a result for every batch we have 50 features (5 for every status and equipmen
 
 For the modelling part we continue to use pySpark, specifically we use pySpark MLlib. For testing models we use 80%/20% train/test split. We start with a simple Linear Regression and achieve an R-squared of 91%. Next, we try to tune the parameters with the 5-fold cross-validation scheme and we also try a Random Forest model but it performs much worse, so we decided to continue with a linear model.
 
-After looking closer at the features we find that many of them are very correlated and it helps to reduce their number to 10. Only this helps to reduce overfitting and increase test R-squared to 92%.
+After looking closer at the features we found that many of them are very correlated and it helped to reduce their number to 10. Only this helped to reduce overfitting and increased test R-squared to 92%.
 
-Feature reduction also allows us to use polynomial features, in our case we use second-order features. This step significantly improves the model and achieves 97% R-squared. 
+Feature reduction also allowed us to use polynomial features, in our case we used second-order features. This step significantly improves the model and achieves 97% R-squared.
 
 All these steps can be found in the _building-predictive-models.ipynb_.
 
